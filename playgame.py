@@ -4,6 +4,9 @@ import time
 import random
 import winsound
 
+"""
+Oyunda kullanılan değişkenleri tanımlama
+"""
 screen = turtle.Screen()
 screen.setup(1.0, 1.0)
 screen.bgcolor("grey")
@@ -41,6 +44,9 @@ ykaya2 = 400
 ykaya3 = 600
 ykaya4 = 9000
 
+"""
+Oyunun basladığını veya bittiğini belirten booleanlar. İleride bunlar ile oyunu düzenliyoruz.
+"""
 def oyunubaslat():
     global oyunbasladi
     oyunbasladi = True
@@ -49,6 +55,9 @@ def oyundancik():
     global oyundurumu
     oyundurumu = False
 
+"""
+Hareket durumlarını tanımlama ve her zıplayışta +1 skor ekleme.
+"""
 def zipla():
     global havadakalma
     if not havadakalma:
@@ -86,6 +95,9 @@ def solagitme():
     soldurum = False
 
 
+"""
+Kurbağayı tanımlama.
+"""
 def kurbagacik():
     kurbaga.shape(kurbagagif)
     kurbaga.color("pink")
@@ -108,6 +120,9 @@ def kurbagacik():
     turtle.onkeyrelease(solagitme, "a")
     turtle.onkey(oyundancik, "c")
 
+"""
+Üstüne zıplayacağımız kayalar
+"""
 def kaya1():
     dikdortgen1.shape(kaya)
     dikdortgen1.color("black")
@@ -144,10 +159,17 @@ def kaya4():
     dikdortgen4.setheading(90)
     dikdortgen4.shapesize(2, 2, 2)
 
+"""
+Müzik oynatma.
+"""
 def playmusic():
     winsound.PlaySound(song, winsound.SND_ASYNC)
 
+
 def oyundongusu():
+    """
+    Kayaların konumlarını belirliyoruz.
+    """
     global xkaya1,xkaya2,xkaya3,xkaya4,skor
     xkaya1 = random.randrange(-550, 400)
     xkaya2 = random.randrange(-550, 400)
@@ -164,6 +186,9 @@ def oyundongusu():
     kaya3()
     kaya4()
 
+    """
+    Save dosyası varsa en yüksek skoru dosyadan alıyor. Eğer yok ise 0 kabul ediyor.
+    """
     try:
         with open('score.dat', 'rb') as file:
             global yuksekskor
@@ -173,6 +198,9 @@ def oyundongusu():
 
     skor = 0
 
+    """
+    Ekrana yazdırma
+    """
     skorturtle.speed(0)
     skorturtle.color("black")
     skorturtle.penup()
@@ -210,12 +238,18 @@ def oyundongusu():
     playmusic()
 
     while oyundurumu:
+        """
+        Skor ile yüksekskor eşit ise bunu dosyaya yazıyor.
+        """
         if skor == yuksekskor:
             with open('score.dat', 'wb') as file:
                 pickle.dump(skor, file)
 
         xkurbaga = kurbaga.xcor()
         ykurbaga = kurbaga.ycor()
+        """
+        Ekrandan çıkmaması için sağdan ve soldan engel koyuyoruz
+        """
         if xkurbaga > 600:
             global sagdurum
             sagdurum = False
@@ -224,6 +258,9 @@ def oyundongusu():
             soldurum = False
         if ykurbaga > -275:
             oyunubaslat()
+        """
+        Aşağı düşme durumu
+        """
         if ykurbaga < -400:
             global oyunbasladi
             oyunbasladi = False
@@ -232,6 +269,9 @@ def oyundongusu():
             yuksekskorturtle.clear()
             oneri.clear()
             oyundongusu()
+        """
+        Kayaların altından üstüne çıkamama ve çarpma durumu.
+        """
         if (xkaya1 - 128 < xkurbaga < xkaya1 + 128) and (ykaya1 - 40 < ykurbaga + 53 < ykaya1 - 10):
             global ziplamadurumu
             soldurum = False
@@ -249,6 +289,9 @@ def oyundongusu():
             soldurum = False
             sagdurum = False
             ziplamadurumu = False
+        """
+        Kayaların üstünde durma ve bu sırada kayaların hareketi.
+        """
         if (ykaya1 < ykurbaga - 44 < ykaya1 + 10) and (xkaya1 - 128 < xkurbaga < xkaya1 + 128):
             ykurbaga += 4
             global havadakalma
@@ -410,10 +453,15 @@ def oyundongusu():
                     dikdortgen2.goto(xkaya2, ykaya2)
                     dikdortgen3.goto(xkaya3, ykaya3)
                     dikdortgen4.goto(xkaya4, ykaya4)
+        """
+        Kurbağanın zıplamasını oldukça gerçeğe benzetmek için hesaplar. 
+        """
         if oyunbasladi:
-            ykurbaga -= 4
+            ykurbaga -= 4 # Yerçekimi gibi aşağı bir hareket.
         else:
             havadakalma = False
+
+        # Gittikçe yukarı doğru hız azalıyor.
         if ziplamadurumu and ykurbaga < 90:
             ykurbaga += 8
         if ziplamadurumu and ykurbaga <= 180:
@@ -429,6 +477,9 @@ def oyundongusu():
             xkurbaga += 5
         if soldurum:
             xkurbaga -= 5
+        """
+        Kayalar ekrandan aşağı kayınca tekrardan yukarı geliyor.
+        """
         if ykaya1 < -400:
             ykaya1 = 600
         if ykaya2 < -400:
