@@ -10,6 +10,7 @@ screen.bgcolor("grey")
 kaya = "kaya.gif"
 kurbagagif = "kurbaga.gif"
 background = "background.gif"
+song = "sarki.wav"
 screen.bgpic(background)
 screen.addshape(kaya)
 screen.addshape(kurbagagif)
@@ -144,7 +145,6 @@ def kaya4():
     dikdortgen4.shapesize(2, 2, 2)
 
 def playmusic():
-    song = "sarki.wav"
     winsound.PlaySound(song, winsound.SND_ASYNC)
 
 def oyundongusu():
@@ -207,6 +207,7 @@ def oyundongusu():
     oneri.setposition(550, -220)
     oneri.write("Önerilen zıplama noktası", align="center", font=("Arial", 25, "normal"))
     oneri.hideturtle()
+    playmusic()
 
     while oyundurumu:
         if skor == yuksekskor:
@@ -271,11 +272,20 @@ def oyundongusu():
                     dikdortgen2.goto(xkaya2, ykaya2)
                     dikdortgen3.goto(xkaya3, ykaya3)
                     dikdortgen4.goto(xkaya4, ykaya4)
-                else:
+                elif skor < 70:
                     ykaya1 -= 12
                     ykaya2 -= 12
                     ykaya3 -= 12
                     ykaya4 -= 12
+                    dikdortgen1.goto(xkaya1, ykaya1)
+                    dikdortgen2.goto(xkaya2, ykaya2)
+                    dikdortgen3.goto(xkaya3, ykaya3)
+                    dikdortgen4.goto(xkaya4, ykaya4)
+                else:
+                    ykaya1 -= 16
+                    ykaya2 -= 16
+                    ykaya3 -= 16
+                    ykaya4 -= 16
                     dikdortgen1.goto(xkaya1, ykaya1)
                     dikdortgen2.goto(xkaya2, ykaya2)
                     dikdortgen3.goto(xkaya3, ykaya3)
@@ -302,11 +312,20 @@ def oyundongusu():
                     dikdortgen2.goto(xkaya2, ykaya2)
                     dikdortgen3.goto(xkaya3, ykaya3)
                     dikdortgen4.goto(xkaya4, ykaya4)
-                else:
+                elif skor < 70:
                     ykaya1 -= 12
                     ykaya2 -= 12
                     ykaya3 -= 12
                     ykaya4 -= 12
+                    dikdortgen1.goto(xkaya1, ykaya1)
+                    dikdortgen2.goto(xkaya2, ykaya2)
+                    dikdortgen3.goto(xkaya3, ykaya3)
+                    dikdortgen4.goto(xkaya4, ykaya4)
+                else:
+                    ykaya1 -= 16
+                    ykaya2 -= 16
+                    ykaya3 -= 16
+                    ykaya4 -= 16
                     dikdortgen1.goto(xkaya1, ykaya1)
                     dikdortgen2.goto(xkaya2, ykaya2)
                     dikdortgen3.goto(xkaya3, ykaya3)
@@ -333,11 +352,20 @@ def oyundongusu():
                     dikdortgen2.goto(xkaya2, ykaya2)
                     dikdortgen3.goto(xkaya3, ykaya3)
                     dikdortgen4.goto(xkaya4, ykaya4)
-                else:
+                elif skor < 70:
                     ykaya1 -= 12
                     ykaya2 -= 12
                     ykaya3 -= 12
                     ykaya4 -= 12
+                    dikdortgen1.goto(xkaya1, ykaya1)
+                    dikdortgen2.goto(xkaya2, ykaya2)
+                    dikdortgen3.goto(xkaya3, ykaya3)
+                    dikdortgen4.goto(xkaya4, ykaya4)
+                else:
+                    ykaya1 -= 16
+                    ykaya2 -= 16
+                    ykaya3 -= 16
+                    ykaya4 -= 16
                     dikdortgen1.goto(xkaya1, ykaya1)
                     dikdortgen2.goto(xkaya2, ykaya2)
                     dikdortgen3.goto(xkaya3, ykaya3)
@@ -364,11 +392,20 @@ def oyundongusu():
                     dikdortgen2.goto(xkaya2, ykaya2)
                     dikdortgen3.goto(xkaya3, ykaya3)
                     dikdortgen4.goto(xkaya4, ykaya4)
-                else:
+                elif skor < 70:
                     ykaya1 -= 12
                     ykaya2 -= 12
                     ykaya3 -= 12
                     ykaya4 -= 12
+                    dikdortgen1.goto(xkaya1, ykaya1)
+                    dikdortgen2.goto(xkaya2, ykaya2)
+                    dikdortgen3.goto(xkaya3, ykaya3)
+                    dikdortgen4.goto(xkaya4, ykaya4)
+                else:
+                    ykaya1 -= 16
+                    ykaya2 -= 16
+                    ykaya3 -= 16
+                    ykaya4 -= 16
                     dikdortgen1.goto(xkaya1, ykaya1)
                     dikdortgen2.goto(xkaya2, ykaya2)
                     dikdortgen3.goto(xkaya3, ykaya3)
@@ -403,5 +440,5 @@ def oyundongusu():
 
         kurbaga.goto(xkurbaga, ykurbaga)
 
-
+playmusic()
 oyundongusu()
